@@ -7,11 +7,11 @@ import PIL.Image
 import PIL.ImageDraw
 
 
-def generate_athletes():
+def generate_athletes(athlete_count):
     # Generate 5000 fake people with a name, dob, gender, team (red, blue, green, yellow) each
     fake = Faker()
     teams = ["red", "blue", "green", "yellow"]
-    for _ in range(10000):
+    for _ in range(athlete_count):
         # Generate fake gender
         gender = random.choice(["male", "female"]) if random.random() > 0.1 else "other"
 
@@ -79,12 +79,12 @@ def generate_athlete_photos():
         photo.save("output/athlete_photos/" + athlete + ".jpeg")
 
 
-def generate_races():
+def generate_races(races, athletes_per_race):
     fake = Faker()
     # get a list of all the athletes
     athletes = os.listdir("output/athletes")
 
-    for i in range(100):
+    for i in range(races):
         data = {
             "type": "race",
             "name": "Race " + str(i),
@@ -93,7 +93,7 @@ def generate_races():
             "results": {},
         }
 
-        for j in range(100):
+        for j in range(athletes_per_race):
             athlete = random.choice(athletes)
             athlete = athlete.split(".")[0]
             data["results"][athlete] = {
@@ -117,6 +117,6 @@ if __name__ == "__main__":
     pathlib.Path("output/athlete_photos").mkdir(parents=True, exist_ok=True)
     pathlib.Path("output/results").mkdir(parents=True, exist_ok=True)
 
-    generate_athletes()
+    generate_athletes(10000)
     generate_athlete_photos()
-    generate_races()
+    generate_races(100, 100)
