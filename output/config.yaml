@@ -1,0 +1,9 @@
+teams:
+  red:
+    colour: '#ff0000'
+  blue:
+    colour: '#0000ff'
+  green:
+    colour: '#00ff00'
+  yellow:
+    colour: '#ffff00'
